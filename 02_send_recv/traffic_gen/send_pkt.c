@@ -54,7 +54,7 @@ int lcore_send_pkt(struct lcore_params *p)
         for (i = 0; i < BURST_SIZE; i++)
         {          
             eth_hdr = rte_pktmbuf_mtod(pkts[i], struct rte_ether_hdr *);
-            eth_hdr->dsr_addr = d_addr;
+            eth_hdr->dst_addr = d_addr;
             eth_hdr->src_addr = s_addr;
             eth_hdr->ether_type = ether_type;
 

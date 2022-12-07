@@ -2,14 +2,14 @@
 
 static const struct rte_eth_conf port_conf_default = {
     .rxmode = {
-        .mtu = RTE_ETHER_MAX_LEN,
+        .mtu = 1460,
     .mq_mode = RTE_ETH_MQ_RX_RSS,
     },
     .rx_adv_conf = {
         .rss_conf = {
             .rss_key = NULL,
             //mlx5 support hf:
-            .rss_hf = RTE_ETH_RSS_IP | RTE_ETH_RSS_TCP | RTE_ETH_RSS_UDP,
+            //.rss_hf = RTE_ETH_RSS_IP | RTE_ETH_RSS_TCP | RTE_ETH_RSS_UDP,
             //i40e support hf: 
             //.rss_hf = ETH_RSS_NONFRAG_IPV4_UDP | ETH_RSS_NONFRAG_IPV4_TCP,
         },
@@ -149,10 +149,10 @@ int port_init(uint16_t port, struct rte_mempool *mbuf_pool)
            addr.addr_bytes[2], addr.addr_bytes[3],
            addr.addr_bytes[4], addr.addr_bytes[5]);
 
-    /* Enable RX in promiscuous mode for the Ethernet device. */
+    /* Enable RX in promiscuous mode for the Ethernet device. 
     retval = rte_eth_promiscuous_enable(port);
     if (retval != 0)
         return retval;
-
+    */
     return 0;
 }

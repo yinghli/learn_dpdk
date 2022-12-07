@@ -26,13 +26,13 @@ int lcore_send_pkt(struct lcore_params *p)
     struct rte_ipv4_hdr *ipv4_hdr;
     struct rte_udp_hdr *udp_hdr;
 
-    //init mac
-    struct rte_ether_addr s_addr = {{0xec, 0x0d, 0x9a, 0xc5, 0xdf, 0xfc}};
-    struct rte_ether_addr d_addr = {{0xca, 0xfe, 0xbe, 0xef, 0x00, 0x01}};
+    //init mac 42:01:0a:32:01:0e
+    struct rte_ether_addr s_addr = {{0x42, 0x01, 0x0a, 0x32, 0x01, 0x0e}};
+    struct rte_ether_addr d_addr = {{0x42, 0x01, 0x0a, 0x32, 0x01, 0x0f}};
 
     //init IP header
-    rte_be32_t s_ip_addr = string_to_ip("1.0.0.253");
-    rte_be32_t d_ip_addr = string_to_ip("1.0.0.1");
+    rte_be32_t s_ip_addr = string_to_ip("10.50.1.14");
+    rte_be32_t d_ip_addr = string_to_ip("10.50.1.15");
     uint16_t ether_type = rte_cpu_to_be_16(0x0800);
     //Defined header in UDP
     struct SRoU

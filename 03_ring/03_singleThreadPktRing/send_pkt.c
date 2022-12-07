@@ -1,4 +1,3 @@
-
 #include "send_pkt.h"
 
 rte_be32_t string_to_ip(char *s)
@@ -27,12 +26,12 @@ int lcore_send_pkt(struct lcore_params *p)
     struct rte_udp_hdr *udp_hdr;
 
     //init mac
-    struct rte_ether_addr s_addr = {{0xec, 0x0d, 0x9a, 0xc5, 0xdf, 0xfc}};
-    struct rte_ether_addr d_addr = {{0xec, 0x0d, 0x9a, 0xc5, 0xdf, 0xfd}};
+    struct rte_ether_addr s_addr = {{0x42, 0x01, 0x0a, 0x32, 0x01, 0x0f}};
+    struct rte_ether_addr d_addr = {{0x42, 0x01, 0x0a, 0x32, 0x01, 0x0e}};
 
     //init IP header
-    rte_be32_t s_ip_addr = string_to_ip("1.0.0.253");
-    rte_be32_t d_ip_addr = string_to_ip("1.0.0.1");
+    rte_be32_t s_ip_addr = string_to_ip("10.50.1.15");
+    rte_be32_t d_ip_addr = string_to_ip("10.50.1.14");
     uint16_t ether_type = rte_cpu_to_be_16(0x0800);
     //Defined header in UDP
     struct SRoU
@@ -56,8 +55,8 @@ int lcore_send_pkt(struct lcore_params *p)
             //build_pkt(pkts[i]);
 
             eth_hdr = rte_pktmbuf_mtod(pkts[i], struct rte_ether_hdr *);
-            eth_hdr->d_addr = d_addr;
-            eth_hdr->s_addr = s_addr;
+            eth_hdr->dst_addr = d_addr;
+            eth_hdr->src_addr = s_addr;
             eth_hdr->ether_type = ether_type;
 
             ipv4_hdr = rte_pktmbuf_mtod_offset(pkts[i], struct rte_ipv4_hdr *, sizeof(struct rte_ether_hdr));
@@ -90,7 +89,7 @@ int lcore_send_pkt(struct lcore_params *p)
             pkts[i]->l2_len = sizeof(struct rte_ether_hdr);
             pkts[i]->l3_len = sizeof(struct rte_ipv4_hdr);
             pkts[i]->l4_len = sizeof(struct rte_udp_hdr);
-            pkts[i]->ol_flags |= PKT_TX_IPV4 | PKT_TX_IP_CKSUM | PKT_TX_UDP_CKSUM;
+            pkts[i]->ol_flags |= RTE_MBUF_F_TX_IPV4 | RTE_MBUF_F_TX_IP_CKSUM | RTE_MBUF_F_TX_UDP_CKSUM;
             ipv4_hdr->hdr_checksum = 0;
             udp_hdr->dgram_cksum = rte_ipv4_phdr_cksum(ipv4_hdr, pkts[i]->ol_flags);
             pkts[i]->data_len = pkt_size;

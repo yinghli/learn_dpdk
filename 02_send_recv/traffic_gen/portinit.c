@@ -26,43 +26,43 @@ int port_init(uint16_t port, struct rte_mempool *mbuf_pool)
     if (dev_info.rx_offload_capa & RTE_ETH_RX_OFFLOAD_CHECKSUM)
     {
         printf("port[%u] support RX cheksum offload.\n", port);
-        port_conf.rxmode.offloads |= DEV_RX_OFFLOAD_CHECKSUM;
+        port_conf.rxmode.offloads |= RTE_ETH_RX_OFFLOAD_CHECKSUM;
     }
 
     if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_MBUF_FAST_FREE)
     {
         printf("port[%u] support TX mbuf fast free offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_MBUF_FAST_FREE;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_MBUF_FAST_FREE;
     }
 
     if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_MT_LOCKFREE)
     {
         printf("port[%u] support TX MT lock free offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_MT_LOCKFREE;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_MT_LOCKFREE;
     }
 
     if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_IPV4_CKSUM)
     {
         printf("port[%u] support TX IPv4 checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_IPV4_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_IPV4_CKSUM;
     }
 
     if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_UDP_CKSUM)
     {
         printf("port[%u] support TX UDP checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_UDP_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_UDP_CKSUM;
     }
 
     if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_TCP_CKSUM)
     {
         printf("port[%u] support TX TCP checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_TCP_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_TCP_CKSUM;
     }
 
     if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_SCTP_CKSUM)
     {
         printf("port[%u] support TX SCTP checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_SCTP_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_SCTP_CKSUM;
     }
 
     /* Configure the Ethernet device. */

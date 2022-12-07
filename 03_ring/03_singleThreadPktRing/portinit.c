@@ -2,10 +2,10 @@
 
 static const struct rte_eth_conf port_conf_default = {
     .rxmode = {
-        .max_rx_pkt_len = RTE_ETHER_MAX_LEN,
+        .mtu=1460,
     },
     .txmode = {
-        .mq_mode = ETH_MQ_TX_NONE,
+        .mq_mode = RTE_ETH_MQ_TX_NONE,
     }
 
 };
@@ -33,47 +33,47 @@ int port_init(uint16_t port, struct rte_mempool *mbuf_pool)
     }
     printf("\n\ninitializing port %d...\n", port);
 
-    if (dev_info.rx_offload_capa & DEV_RX_OFFLOAD_CHECKSUM)
+    if (dev_info.rx_offload_capa & RTE_ETH_RX_OFFLOAD_CHECKSUM)
     {
         printf("port[%u] support RX cheksum offload.\n", port);
-        port_conf.rxmode.offloads |= DEV_RX_OFFLOAD_CHECKSUM;
+        port_conf.rxmode.offloads |= RTE_ETH_RX_OFFLOAD_CHECKSUM;
     }
 
-    if (dev_info.tx_offload_capa & DEV_TX_OFFLOAD_MBUF_FAST_FREE)
+    if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_MBUF_FAST_FREE)
     {
         printf("port[%u] support TX mbuf fast free offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_MBUF_FAST_FREE;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_MBUF_FAST_FREE;
     }
 
-    if (dev_info.tx_offload_capa & DEV_TX_OFFLOAD_MT_LOCKFREE)
+    if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_MT_LOCKFREE)
     {
         printf("port[%u] support TX MT lock free offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_MT_LOCKFREE;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_MT_LOCKFREE;
     }
 
 
-    if (dev_info.tx_offload_capa & DEV_TX_OFFLOAD_IPV4_CKSUM)
+    if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_IPV4_CKSUM)
     {
         printf("port[%u] support TX IPv4 checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_IPV4_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_IPV4_CKSUM;
     }
 
-    if (dev_info.tx_offload_capa & DEV_TX_OFFLOAD_UDP_CKSUM)
+    if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_UDP_CKSUM)
     {
         printf("port[%u] support TX UDP checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_UDP_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_UDP_CKSUM;
     }
 
-    if (dev_info.tx_offload_capa & DEV_TX_OFFLOAD_TCP_CKSUM)
+    if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_TCP_CKSUM)
     {
         printf("port[%u] support TX TCP checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_TCP_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_TCP_CKSUM;
     }
 
-    if (dev_info.tx_offload_capa & DEV_TX_OFFLOAD_SCTP_CKSUM)
+    if (dev_info.tx_offload_capa & RTE_ETH_TX_OFFLOAD_SCTP_CKSUM)
     {
         printf("port[%u] support TX SCTP checksum offload.\n", port);
-        port_conf.txmode.offloads |= DEV_TX_OFFLOAD_SCTP_CKSUM;
+        port_conf.txmode.offloads |= RTE_ETH_TX_OFFLOAD_SCTP_CKSUM;
     }
 
     /* Configure the Ethernet device. */
@@ -140,10 +140,10 @@ int port_init(uint16_t port, struct rte_mempool *mbuf_pool)
            addr.addr_bytes[2], addr.addr_bytes[3],
            addr.addr_bytes[4], addr.addr_bytes[5]);
 
-    /* Enable RX in promiscuous mode for the Ethernet device. */
+    /* Enable RX in promiscuous mode for the Ethernet device.
     retval = rte_eth_promiscuous_enable(port);
     if (retval != 0)
         return retval;
-
+    */
     return 0;
 }

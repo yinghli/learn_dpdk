@@ -22,7 +22,7 @@
 #define SCHED_TX_RING_SZ 65536
 
 #define NUM_RX_QUEUE 2
-#define NUM_TX_QUEUE 8
+#define NUM_TX_QUEUE 4
 
 #define BURST_SIZE 64
 #define BURST_SIZE_TX 32

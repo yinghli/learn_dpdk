@@ -34,20 +34,20 @@ struct lcore_params {
 
 static const struct rte_eth_conf port_conf_default = {
     .rxmode = {
-        .max_rx_pkt_len = RTE_ETHER_MAX_LEN,
-    .mq_mode = ETH_MQ_RX_RSS,
+        .mtu = RTE_ETHER_MAX_LEN,
+    .mq_mode = RTE_ETH_MQ_RX_RSS,
     },
     .rx_adv_conf = {
         .rss_conf = {
             .rss_key = NULL,
             //mlx5 support hf:
-            .rss_hf = ETH_RSS_IP | ETH_RSS_TCP | ETH_RSS_UDP,
+            .rss_hf = RTE_ETH_RSS_IP | RTE_ETH_RSS_TCP | RTE_ETH_RSS_UDP,
             //i40e support hf: 
             //.rss_hf = ETH_RSS_NONFRAG_IPV4_UDP | ETH_RSS_NONFRAG_IPV4_TCP,
         },
     },
     .txmode = {
-        .mq_mode = ETH_MQ_TX_NONE,
+        .mq_mode = RTE_ETH_MQ_TX_NONE,
     }
 
 };

@@ -20,8 +20,8 @@
 #define SCHED_RX_RING_SZ 8192
 #define SCHED_TX_RING_SZ 65536
 
-#define NUM_RX_QUEUE 1
-#define NUM_TX_QUEUE 8
+#define NUM_RX_QUEUE 4
+#define NUM_TX_QUEUE 4
 
 #define BURST_SIZE 64
 #define BURST_SIZE_TX 32
@@ -34,14 +34,14 @@ struct lcore_params {
 
 static const struct rte_eth_conf port_conf_default = {
     .rxmode = {
-        .mtu = RTE_ETHER_MAX_LEN,
+        .mtu = 1460,
     .mq_mode = RTE_ETH_MQ_RX_RSS,
     },
     .rx_adv_conf = {
         .rss_conf = {
             .rss_key = NULL,
             //mlx5 support hf:
-            .rss_hf = RTE_ETH_RSS_IP | RTE_ETH_RSS_TCP | RTE_ETH_RSS_UDP,
+            //.rss_hf = RTE_ETH_RSS_IP | RTE_ETH_RSS_TCP | RTE_ETH_RSS_UDP,
             //i40e support hf: 
             //.rss_hf = ETH_RSS_NONFRAG_IPV4_UDP | ETH_RSS_NONFRAG_IPV4_TCP,
         },
